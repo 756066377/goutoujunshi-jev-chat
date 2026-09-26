@@ -4,113 +4,59 @@
 
 # Goutoujunshi Jev Chat
 
-**Goutoujunshi beside your chat window: screen reading, analysis, and reply drafts.** This standalone project builds on [Goutoujunshi](https://github.com/shengjidaguai-china/goutoujunshi). The public downloads are a Mac source preview, a Windows preview ZIP, and an Android debug APK. The Android build currently cannot capture WeChat chat screenshots, so WeChat is unsupported. Windows and Android still need device-level validation. You decide whether to send every draft.
+**Goutoujunshi beside your chat window: screen reading, analysis, and reply drafts.** This standalone project builds on [Goutoujunshi](https://github.com/shengjidaguai-china/goutoujunshi). The primary operating environment is Windows (supporting Windows 10/11 and WeChat for Windows 4.x). It supports window chat text capture, Jev strategy judgment, and reply candidate drafting. You decide whether to send every draft.
 
 If it helps you, [Star the project](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/stargazers) so you can find it again and help others discover it.
 
-## Mac, Windows, and Android preview packages
+## Windows Preview Package
 
-Download the file for your platform from [GitHub Releases](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/releases/latest). Extract the full Windows ZIP before launching its executable. Build logs are available on the [GitHub Actions build page](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/actions/workflows/platform-build.yml).
+Download the file for Windows from [GitHub Releases](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/releases/latest). Extract the full Windows ZIP before launching its executable. Build logs are available on the [GitHub Actions build page](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/actions/workflows/platform-build.yml).
 
 | Platform | Artifact | Current status |
 | --- | --- | --- |
-| macOS | [`goutoujunshi-jev-chat-mac.zip`](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/releases/latest/download/goutoujunshi-jev-chat-mac.zip) | Source ZIP. Run `安装依赖.command`, then `离线演示.command` or `启动.command`. Requires Python 3.12 and uv; there is no signed `.app`. |
-| Windows | [`goutoujunshi-jev-chat-windows-preview.zip`](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/releases/latest/download/goutoujunshi-jev-chat-windows-preview.zip) | Executable-directory ZIP. Automated build passes; Windows device validation is pending. |
-| Android | [`goutoujunshi-jev-chat-android-debug.apk`](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/releases/latest/download/goutoujunshi-jev-chat-android-debug.apk) | Android 11+ debug preview. **It currently cannot capture WeChat chat screenshots, so WeChat is unsupported.** Other chat-app paths still need device validation. |
+| Windows | [`goutoujunshi-jev-chat-windows-preview.zip`](https://github.com/shengjidaguai-china/goutoujunshi-jev-chat/releases/latest/download/goutoujunshi-jev-chat-windows-preview.zip) | Executable-directory ZIP. Automated build passes. |
 
-The screenshots and full transcript review, relationship profiles, and candlestick view below are from the Mac version. Windows includes chat capture, Jev judgment, and reply drafting; Android provides an overlay, judgment, and draft replies in a debug preview. Those full Mac screens have not been ported. See the [Windows guide](integrations/jev_windows/README.md) and [Android guide](integrations/jev_android/README.md).
+For detailed setup and source running instructions, see the [Windows guide](integrations/jev_windows/README.md).
 
-### Android: install the debug APK
+### Quick Start (Pre-compiled ZIP)
 
-On Android 11 or later, download the APK and allow installation from that source when prompted. Configure the judgment and reply endpoints in the app, then grant Accessibility and overlay permissions as guided. The assistant and automatic analysis start disabled and must be enabled by you. **This Android preview cannot currently capture WeChat chat screenshots, so it does not support WeChat.** The Mac screenshots beside WeChat do not show Android behavior. QQ, X, and Feishu paths still require validation on actual devices. The app drafts replies; you decide whether to send them.
+Requires Windows 10 version 1903 or later, or Windows 11, with WeChat for Windows 4.x:
 
-### Windows: extract the ZIP
+1. Download the preview ZIP, **extract the entire archive**, open the `goutoujunshi-jev-chat-windows` folder.
+2. Run `goutoujunshi-jev-chat-windows.exe` (no Python installation required).
+3. In Settings, configure the **Jev judgment** and **reply generation** endpoints separately.
+4. Open the intended WeChat conversation and keep the window visible, then use the floating window to capture and analyze.
+5. Copy candidates or fill them into drafts. Verify the conversation and recipient before sending drafts yourself.
 
-Requires Windows 10 version 1903 or later, or Windows 11, with WeChat for Windows 4.x. Download the preview ZIP, **extract the entire archive**, open the `goutoujunshi-jev-chat-windows` folder, and run `goutoujunshi-jev-chat-windows.exe`. The packaged build does not require a separate Python installation.
+### Run from Source
 
-In Settings, configure the **Jev judgment** and **reply generation** endpoints separately. Open the intended WeChat conversation and keep the window visible, then use the overlay to capture and analyze it. You can copy a candidate or fill a draft. Filling depends on window coordinates; verify the conversation, recipient, and draft before sending it yourself. This build still needs Windows device validation. See the [Windows guide](integrations/jev_windows/README.md) for running from source.
+To run from source on Windows:
 
-### macOS: run the source preview
-
-Install Python 3.12 and [`uv`](https://docs.astral.sh/uv/), then download and extract the Mac ZIP. Run `安装依赖.command`, followed by `离线演示.command` to check that the interface opens. Run `启动.command` for normal use. In “Settings → Interfaces and models → Configure interfaces,” save a **DeepSeek key** and, if you want Jev strategy judgment, a separate **TypeSafe Jev key**.
-
-Grant the **terminal that launches the app** Screen Recording permission in macOS Privacy & Security. Filling a chat draft also requires Accessibility permission. Open the intended conversation, choose “Read conversation” from the floating bubble, verify the recognized transcript and speakers, and confirm analysis. This ZIP is a source preview, not a signed `.app`. More commands and OCR options are in [Install and run](#install-and-run) below.
-
-## Screenshots
-
-These screenshots show the Mac version. Synthetic demo data is labeled separately from live captures.
-
-### Overlay beside WeChat
-
-![The overlay beside WeChat shows possible intent, evidence, advice, and ranked reply drafts](documentation/screenshots/overlay-in-wechat.png)
-
-*Desktop screenshot supplied by the author. The panel shows a possible intent, the model's confidence estimate, evidence from the visible chat, and ranked reply drafts. The 52% and 48% values are relative recommendation weights for this set of drafts. “Copy” puts a draft on the clipboard; “Fill” inserts it into the current chat draft. You choose whether to send it.*
-
-### Detailed analysis
-
-![Detailed analysis in an offline synthetic demo](documentation/screenshots/analysis-detail-demo.png)
-
-*Offline synthetic demo. The detail view separates possible intent, advice, your own feelings, observed facts, and reasonable hypotheses. The transcript tab lets you check the recognized text before analysis. The 62% shown here is a model self-assessment for its intent hypothesis, not a validated probability.*
-
-### Relationship candlestick window
-
-![The relationship candlestick window with example patterns and a chat CSV import option](documentation/screenshots/kline-window.png)
-
-*Click “K-line” at the top of the overlay to open the relationship trends window. The menu offers five patterns, and you can import a chat CSV to explore how the chart changes over time.*
-
-### Five illustrative patterns
-
-![Five relationship candlestick examples](documentation/screenshots/five-kline-patterns.png)
-
-*Five relationship patterns: mutual warming, cooling after intense chat, repair after conflict, a busy but reliable partner, and drawing a line after a clear boundary. Follow the changes along the timeline, then compare each turning point with the chat event behind it.*
-
-## One round of use
-
-1. Open the target conversation in WeChat for Mac and click “Read conversation” in the overlay.
-2. Check the recognized text, speakers, relationship stage, and your goal before confirming analysis.
-3. Review the possible intent, confidence estimate, evidence, advice, and ranked reply drafts. Open “Detailed analysis” for facts, hypotheses, unknowns, next steps, and stop conditions.
-4. Copy a draft or fill the verified chat input. You decide when and whether to send it.
-
-**Apple Vision** performs local text recognition by default. You can opt into **DeepSeek image recognition**; that mode sends a cropped chat screenshot to DeepSeek and incurs API usage. DeepSeek or a configured OpenAI-compatible endpoint generates reply drafts. **TypeSafe Jev is an optional strategy layer**: when enabled, it chooses a strategy before the reply model generates drafts. The two API keys are configured separately through the UI and stored in dedicated Mac Keychain entries. No real keys are included in this repository.
-
-Intent confidence is the reply model's uncalibrated self-assessment. Candidate percentages are relative recommendation weights within the current set of drafts. Neither is a verified probability of intent, reply rate, or relationship outcome. The app shows an unknown state when the evidence is insufficient.
-
-## What makes it different
-
-- **Replies in your style:** It uses only verified messages attributed to you in the current conversation. “More like me” revises the current drafts without training a model or borrowing text from other conversations.
-- **Reasons and trade-offs:** Expand each candidate to see why it fits and what it costs. Advice includes an observation window and a stop condition.
-- **Opt-in relationship profiles:** With explicit consent, the app stores limited background details. You can inspect, pause, undo, or delete them. It does not store the full chat.
-- **Charts with stated rules:** Five example patterns are included. For an imported CSV, the chart tracks daily message-direction balance. Neither chart measures love or relationship quality.
-- **Human control:** OCR results are reviewed first, automatic analysis starts off, and the chat is checked again before filling. The app does not press Send.
-
-## Install and run
-
-Requires macOS, Python 3.12, and [`uv`](https://docs.astral.sh/uv/). From the repository root:
-
-```bash
-cd integrations/jev_mac
-uv venv --python 3.12 .venv
-uv pip install --python .venv/bin/python -r requirements.txt
-./start.command --demo
+```cmd
+cd integrations\jev_windows
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
 ```
 
-`--demo` uses a synthetic conversation and stays offline: it neither reads WeChat nor calls a model. For real use, run `./start.command`. Run `./start.command --settings` to open settings directly, then use “Interfaces and models → Configure interfaces” to save a DeepSeek key and, optionally, a TypeSafe Jev key. Grant the launching terminal macOS Screen Recording permission. Filling a draft also requires Accessibility permission.
+## Features and Workflow
 
-![Offline preview of the provider configuration window](documentation/design/provider-config-preview.png)
+- **Replies in your style:** It uses only verified messages attributed to you in the current conversation.
+- **Clear reasons:** Expand candidate replies to inspect reasons, trade-offs, and boundary warnings.
+- **Human control:** Capture and analysis are user-controlled, and candidate filling inserts into draft input only. The app never presses Send for you.
 
-*Offline preview of the provider settings. DeepSeek and Jev keys are saved separately. Stored values are never shown in the form, and this image contains no real key.*
+## Self-Check and Verification
 
-For models, OCR choices, Keychain and environment configuration, CSV format, and operating limits, see the [Mac usage guide](integrations/jev_mac/README.md) (Chinese).
-
-## Verification and status
-
-As checked on September 24, 2026: 79 Python tests passed; the Mac and Windows automated builds passed; and the Mac ZIP was extracted, its dependencies installed, and its offline demo launched. To repeat the local checks:
+To perform local checks and test suite validation:
 
 ```bash
 python3 -B scripts/validate_skill.py
-python3 -B -m unittest discover -s tests -q
+PYTHONPATH=. python3 -B -m unittest discover -s tests -q
 ```
 
-These are **preview builds**. Live WeChat capture, model requests, and Accessibility filling on Mac were not repeated in this offline check. Windows still needs device-level checks of capture, overlay, and filling against actual chat app versions. Android's non-WeChat chat-app paths also need device validation; this build disables the WeChat capture entry point. An incomplete Jev judgment stops reply drafting. Windows filling uses window coordinates: it checks the current chat and foreground window, but cannot read back the input control. Copy and paste manually when the target is uncertain. Cloud image recognition and analysis send relevant content to the configured services. See the [data-use notice](PRIVACY.md).
+## License and Acknowledgments
 
-The repository bundles Goutoujunshi's behavior rules and selected knowledge. Its original code uses the [MIT License](LICENSE). Mac window modules are adapted from [jev-chat-jarvis-mac](https://github.com/jev-chat/jev-chat-jarvis-mac), with its MIT notice in [vendor/LICENSE](integrations/jev_mac/vendor/LICENSE). Android sources come from [Jev Android](https://github.com/jev-chat/jev-chat-jarvis), and Windows sources from [Jev Windows](https://github.com/jev-chat/jev-chat-windows); both retain their LICENSE and NOTICE in their directories. See the [Windows NOTICE](integrations/jev_windows/NOTICE) for the PySide6-Fluent-Widgets distribution license.
+The main repository is licensed under the [MIT License](LICENSE). The Windows UI component incorporates [Jev Windows](https://github.com/jev-chat/jev-chat-windows) and PySide6-Fluent-Widgets; see [Windows NOTICE](integrations/jev_windows/NOTICE) for redistribution terms.
+
+Special thanks to the jev-chat-jarvis project for inspiration.
