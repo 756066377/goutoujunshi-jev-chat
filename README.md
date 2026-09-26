@@ -77,8 +77,3 @@ PYTHONPATH=. python3 -B -m unittest discover -s tests -q
 仓库主体采用 [MIT 许可证](LICENSE)。Windows 界面与组件参考并集成 [Jev Windows](https://github.com/jev-chat/jev-chat-windows) 及 PySide6-Fluent-Widgets，第三方分发注意事项见 [Windows NOTICE](integrations/jev_windows/NOTICE)。
 
 非常感谢 jev-chat-jarvis 项目，从该项目得到启发，结合 goutoujunshi 拓展而来。
-
-联系我加入升级打怪开源群：
-Email：247133278@qq.com<br>
-WeChat：loonges<br>
-QQ：247133278<br>
